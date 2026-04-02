@@ -19,4 +19,9 @@ protected $fillable = [
 'tags',
 'user_id',
 ];
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

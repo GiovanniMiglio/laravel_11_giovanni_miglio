@@ -19,6 +19,8 @@
 
                 @auth
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('my-articles') }}">I miei Articoli</a>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
                     </li>
 

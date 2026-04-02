@@ -17,3 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 });
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/my-articles', function () {
+    $articles = auth()->user()->articles;
+    return view('articles.my', compact('articles'));
+})->middleware('auth')->name('my-articles');
