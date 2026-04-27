@@ -7,21 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-use HasFactory;
+    use HasFactory;
 
-protected $fillable = [
-'title',
-'content',
-'category',
-'author',
-'image_url',
-'excerpt',
-'tags',
-'user_id',
-];
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    protected $fillable = [
+        'title',
+        'content',
+        'category',
+        'author',
+        'image_url',
+        'excerpt',
+        'user_id',
+    ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

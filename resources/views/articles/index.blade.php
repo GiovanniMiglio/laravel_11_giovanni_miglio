@@ -10,6 +10,7 @@
     <div class="container">
         <h2 class="text-center mb-4">Ultimi Articoli</h2>
 
+
         @if ($articles->isEmpty())
             <p class="text-center text-muted">
                 Non ci sono ancora articoli. Presto arriveranno le prime recensioni e approfondimenti!

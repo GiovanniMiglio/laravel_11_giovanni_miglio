@@ -36,47 +36,50 @@
                         <h3>Contenuto</h3>
                         <p>{{ $article->content }}</p>
                         
-                        @if($article->tags)
+                        @if ($article->tags && $article->tags->count() > 0)
                         <h3>Tag</h3>
-                        <p>{{ $article->tags }}</p>
+                        @foreach ($article->tags as $tag)
+                        <span class="badge bg-primary">{{ $tag->name }}</span>
+                        @endforeach
                         @endif
+                        
                         
                     </div>
                     
                 </div>
                 
-<div class="character-footer text-center mt-4">
-
-    {{-- Pulsanti visibili solo all'autore --}}
-    @auth
-        @if (auth()->id() === $article->user_id)
-            <a href="{{ route('articles.edit', $article) }}" class="show-button me-2">
-                ✦ Modifica ✦
-            </a>
-
-            <form action="{{ route('articles.destroy', $article) }}"
-                  method="POST"
-                  onsubmit="return confirm('Sei sicuro di voler eliminare questo articolo?')"
-                  style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="show-button show-button-danger">
-                    ✦ Elimina ✦
-                </button>
-            </form>
-        @endif
-    @endauth
-
-    {{-- Pulsante sempre visibile --}}
-    <a href="{{ route('articles.index') }}" class="show-button ms-2">
-        Torna agli articoli
-    </a>
-
-</div>
+                <div class="character-footer text-center mt-4">
+                    
+                    {{-- Pulsanti visibili solo all'autore --}}
+                    @auth
+                    @if (auth()->id() === $article->user_id)
+                    <a href="{{ route('articles.edit', $article) }}" class="show-button me-2">
+                        ✦ Modifica ✦
+                    </a>
+                    
+                    <form action="{{ route('articles.destroy', $article) }}"
+                    method="POST"
+                    onsubmit="return confirm('Sei sicuro di voler eliminare questo articolo?')"
+                    style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="show-button show-button-danger">
+                        ✦ Elimina ✦
+                    </button>
+                </form>
+                @endif
+                @endauth
+                
+                {{-- Pulsante sempre visibile --}}
+                <a href="{{ route('articles.index') }}" class="show-button ms-2">
+                    Torna agli articoli
+                </a>
                 
             </div>
             
         </div>
-    </section>
-    
+        
+    </div>
+</section>
+
 </x-layout>

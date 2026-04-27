@@ -9,15 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    Schema::create('articles', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->text('content');
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('articles', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string('category')->nullable();
+            $table->string('author')->nullable();
+            $table->string('image_url')->nullable();
+            $table->text('excerpt')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
     /**
      * Reverse the migrations.
      */
@@ -26,3 +32,4 @@ return new class extends Migration
         Schema::dropIfExists('articles');
     }
 };
+
